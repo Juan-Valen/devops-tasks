@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:18-alpine
+    container_name: cart_db
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+    volumes:
+      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  app:
+    build:
+      context: .
+      dockerfile: compose.Dockerfile
+    container_name: cart_app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DISPLAY=${DISPLAY:-host.docker.internal:0.0}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: host # Allows connection to local X server
+

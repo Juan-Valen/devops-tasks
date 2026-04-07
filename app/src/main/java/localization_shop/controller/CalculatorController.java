@@ -8,10 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import localization_shop.model.Calculator;
 import localization_shop.model.Language;
-import localization_shop.service.LocalizationService;
-
-import java.util.Locale;
-import java.util.Map;
 
 public class CalculatorController {
 
