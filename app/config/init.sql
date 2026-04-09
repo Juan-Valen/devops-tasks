@@ -1,30 +1,30 @@
 CREATE USER carcas WITH PASSWORD 'carcassonne1';
-CREATE DATABASE IF NOT EXISTS shopping_cart_localization;
+CREATE DATABASE shopping_cart_localization;
 
 \c shopping_cart_localization;
 
 
 
 
-CREATE TABLE IF NOT EXISTS cart_records (
+CREATE TABLE cart_records (
     cart_record_id SERIAL PRIMARY KEY,
     total_items INT NOT NULL,
-    total_cost DOUBLE NOT NULL,
+    total_cost NUMERIC NOT NULL,
     language VARCHAR(10),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS cart_items (
+CREATE TABLE cart_items (
     cart_item_id SERIAL PRIMARY KEY,
     cart_record_id INT,
     item_number INT NOT NULL,
-    price DOUBLE NOT NULL,
+    price NUMERIC NOT NULL,
     quantity INT NOT NULL,
-    subtotal DOUBLE NOT NULL,
-    FOREIGN KEY (cart_record_id) REFERENCES cart_records(cart_recordid) ON DELETE CASCADE
+    subtotal NUMERIC NOT NULL,
+    FOREIGN KEY (cart_record_id) REFERENCES cart_records(cart_record_id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS translations (
+CREATE TABLE translations (
     translation_id SERIAL PRIMARY KEY,
     key VARCHAR(100) NOT NULL,
     value VARCHAR(255) NOT NULL,
@@ -82,6 +82,6 @@ INSERT INTO translations (key, value, language) VALUES
 ('calcItemPrompt', 'Beräkna totalt', 'sv');
 
 
-GRANT ALL PRIVILEGES ON DATABASE carcassonne TO carcas;
+GRANT ALL PRIVILEGES ON DATABASE shopping_cart_localization TO carcas;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO carcas;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO carcas;

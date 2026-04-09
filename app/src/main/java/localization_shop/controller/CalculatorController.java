@@ -1,5 +1,7 @@
 package localization_shop.controller;
 
+import javax.swing.text.TableView;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,13 +22,13 @@ public class CalculatorController {
     public Label lblResultNum;
     public TextField textFieldQuantity;
     public TextField textFieldPrice;
-    private Language currentLanguage;
 
+    private Language currentLanguage = new Language();
     Calculator calculator = new Calculator();
 
     @FXML
     public void initialize() {
-        currentLanguage = new Language();
+        setLanguage("en");
 
         Button engButton = createLanguageButton("English", "en");
         Button sweButton = createLanguageButton("Swedish", "sv");
