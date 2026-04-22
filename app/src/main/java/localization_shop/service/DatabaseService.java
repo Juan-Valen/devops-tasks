@@ -5,18 +5,18 @@ import java.sql.*;
 import java.util.Map;
 import java.util.HashMap;
 
-public class databaseService {
-    private static databaseService instance = null;
+public class DatabaseService {
+    private static DatabaseService instance = null;
     private static final String URL = "jdbc:postgresql://localhost:5432/shopping_cart_localization";
     private static final String USER = "carcas";
     private static final String PASSWORD = System.getenv("APP_PASSWORD");
 
-    private databaseService() {
+    private DatabaseService() {
     }
 
-    public static databaseService getInstance() {
+    public static DatabaseService getInstance() {
         if (instance == null)
-            instance = new databaseService();
+            instance = new DatabaseService();
         return instance;
     }
 
@@ -26,7 +26,7 @@ public class databaseService {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, total_items);
-            stmt.setBigDecimal(2, new BigDecimal(total_cost));
+            stmt.setBigDecimal(2, BigDecimal.valueOf(total_cost));
             stmt.setString(3, language);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -41,9 +41,9 @@ public class databaseService {
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, cart_record_id);
             stmt.setInt(2, item_number);
-            stmt.setBigDecimal(3, new BigDecimal(price));
+            stmt.setBigDecimal(3, BigDecimal.valueOf(price));
             stmt.setInt(4, quantity);
-            stmt.setBigDecimal(5, new BigDecimal(price * quantity));
+            stmt.setBigDecimal(5, BigDecimal.valueOf(price * quantity));
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
