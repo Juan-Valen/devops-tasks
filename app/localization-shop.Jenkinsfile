@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -f pipeline/cli.xml clean install' // sh for linux and ios
+                sh 'mvn -f app/pom.xml clean install' // sh for linux and ios
             }
         }
         stage('Test') {
