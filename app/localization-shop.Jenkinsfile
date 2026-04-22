@@ -31,10 +31,12 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQubeServer') {
-                    sh """
-                    mvn clean verify sonar:sonar "-Dsonar.projectKey=translations" "-Dsonar.token=$SONAR_TOKEN"
-                    """
+                dir('app') {
+                    withSonarQubeEnv('SonarQubeServer') {
+                        sh """
+                        mvn clean verify sonar:sonar "-Dsonar.projectKey=translations" "-Dsonar.token=$SONAR_TOKEN"
+                        """
+                    }
                 }
             }
         }
