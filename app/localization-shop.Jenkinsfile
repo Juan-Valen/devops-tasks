@@ -33,13 +33,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQubeServer') {
                     sh """
-                    sonar-scanner
-                        -Dsonar.projectKey=devops-demo
-                        -Dsonar.sources=app/src
-                        -Dsonar.projectName=DevOps-Demo
-                        -Dsonar.host.url=http://localhost:9000
-                        -Dsonar.login=${env.SONAR_TOKEN}
-                        -Dsonar.java.binaries=app/target/classes
+                    mvn clean verify sonar:sonar "-Dsonar.projectKey=translations" "-Dsonar.token=$SONAR_TOKEN"
                     """
                 }
             }
