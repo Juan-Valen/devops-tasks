@@ -32,7 +32,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 dir('app') {
-                    withSonarQubeEnv('SonarQubeServer') {
+                    withCredentials([string(credentialsId: 'SonarQubeToken', variable: 'SONAR_TOKEN')]) {
                         sh """
                         mvn clean verify sonar:sonar "-Dsonar.projectKey=translations" "-Dsonar.token=$SONAR_TOKEN"
                         """
