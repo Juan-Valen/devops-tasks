@@ -15,9 +15,7 @@ public class Language {
 
     public void setLanguage(String languageCode) {
         currentLanguage = languageCode;
-        if (!languages.containsKey(languageCode)) {
-            languages.put(languageCode, DBSI.getTranslations(languageCode));
-        }
+        languages.computeIfAbsent(languageCode, k -> DBSI.getTranslations(k));
     }
 
     public void setLanguage(String languageCode, Map<String, String> translations) {
