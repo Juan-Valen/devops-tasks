@@ -39,7 +39,7 @@ pipeline {
                         -Dsonar.projectName=DevOps-Demo
                         -Dsonar.host.url=http://localhost:9000
                         -Dsonar.login=${env.SONAR_TOKEN}
-                        -Dsonar.java.binaries=app/target/classe
+                        -Dsonar.java.binaries=app/target/classes
                     """
                 }
             }
