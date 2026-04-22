@@ -1,10 +1,10 @@
 package localization_shop.model;
 
-import localization_shop.service.databaseService;
+import localization_shop.service.DatabaseService;
 import java.util.*;
 
 public class Language {
-    private databaseService DBSI = databaseService.getInstance();
+    private DatabaseService DBSI = DatabaseService.getInstance();
 
     private String currentLanguage = "en";
     private Map<String, Map<String, String>> languages = new HashMap<>();
@@ -17,6 +17,13 @@ public class Language {
         currentLanguage = languageCode;
         if (!languages.containsKey(languageCode)) {
             languages.put(languageCode, DBSI.getTranslations(languageCode));
+        }
+    }
+
+    public void setLanguage(String languageCode, Map<String, String> translations) {
+        currentLanguage = languageCode;
+        if (!languages.containsKey(languageCode)) {
+            languages.put(languageCode, translations);
         }
     }
 

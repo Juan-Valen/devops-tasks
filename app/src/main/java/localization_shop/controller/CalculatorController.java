@@ -1,7 +1,5 @@
 package localization_shop.controller;
 
-import javax.swing.text.TableView;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
